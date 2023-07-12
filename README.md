@@ -1,7 +1,7 @@
-# solidity.project
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.18;
- /*
+
+/*
        REQUIREMENTS
     1. Your contract will have public variables that store the details about your coin (Token Name, Token Abbrv., Total Supply)
     2. Your contract will have a mapping of addresses to balances (address => uint)
@@ -14,30 +14,25 @@ pragma solidity 0.8.18;
     5. Lastly, your burn function should have conditionals to make sure the balance of "sender" is greater than or equal 
        to the amount that is supposed to be burned.
 */
- 
-contract MyToken {
- 
-    string public tokenName = "ABC";
-    string public tokenAb = "AB";
+
+contract pranavToken {
+
+    // public variables here
+    string public tokenName = "METAVERSE";
+    string public tokenAbbrv = "MTS";
     uint public totalSupply = 0;
- 
- 
-    // variable mapping
-    mapping(address=>uint) public tokenHolders;
- 
- 
-    // + mint fun
-    function mint(address _address, uint _value) public{
-        totalSupply+=_value;
-        tokenHolders[_address] += _value;
+    // mapping variable here
+    mapping(address => uint) public balances;
+    // mint function
+    function mint (address _address, uint _value) public{
+        totalSupply += _value;
+        balances[_address] += _value;
     }
- 
- 
-    // - burn fun
-    function burn(address _address, uint _value) public{
-        require(tokenHolders[_address] > _value, "funds not available");
-        totalSupply-=_value;
-        tokenHolders[_address] -= _value;
-    }
- 
+    // burn function
+    function burn (address _address, uint _value) public{
+        if (balances[_address] >= _value){
+        totalSupply -= _value;
+        balances[_address] -= _value;
+        }
+    }    
 }
